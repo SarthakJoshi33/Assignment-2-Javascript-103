@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,
+        initial-scale=1.0" />
+
+  <title>Digital Clock</title>
+
+  <style>
+    #clock {
+      font-size: 100px;
+      width: 600px;
+      margin: 200px;
+      text-align: center;
+      border: 2px solid black;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="clock">00:00:00</div>
+  <button type="submit" id="TwelveHour" name="TwelveHour">Twelve Hour</button>
+  <button type="submit" id="TwentyFourHour" name="TwentyFourHour">Twenty Four Hour</button>
+
+  <script>
+    document.getElementById("TwelveHour").addEventListener("click", function TwelveHour(){
+      setInterval(showTime, 1000);
+
+    function showTime() {
+      let time = new Date();
+      let hour = time.getHours();
+      let min = time.getMinutes();
+      let sec = time.getSeconds();
+      am_pm = "AM";
+
+      if (hour > 12) {
+        hour -= 12;
+        am_pm = "PM";
+      }
+      if (hour == 0) {
+        hr = 12;
+        am_pm = "AM";
+      }
+
+      hour = hour < 10 ? "0" + hour : hour;
+      min = min < 10 ? "0" + min : min;
+      sec = sec < 10 ? "0" + sec : sec;
+
+      let currentTime = hour + ":" +
+        min + ":" + sec + am_pm;
+
+      document.getElementById("clock").innerHTML = currentTime;
+    }
+    showTime();
+  });
+
+      document.getElementById("TwentyFourHour").addEventListener("click", function TwentyFourHour(){
+        
+      function currentTime() {
+        var date = new Date(); /* creating object of Date class */
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        var sec = date.getSeconds();
+        hour = updateTime(hour);
+        min = updateTime(min);
+        sec = updateTime(sec);
+        document.getElementById("clock").innerText = hour + " : " + min + " : " + sec; /* adding time to the div */
+        var t = setTimeout(currentTime, 1000);
+      }
+
+      function updateTime(k) {
+        if (k < 10) {
+          return "0" + k;
+        } else {
+          return k;
+        }
+      }
+
+      currentTime();
+    });
+
+  </script>
+</body>
+
+</html>
